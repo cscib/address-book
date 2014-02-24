@@ -6,6 +6,7 @@ import com.cscib.mt.addressbook.model.Person;
 import java.util.List;
 
 /**
+ * A mapper class of which its job is to map objects from AddressBook to another object and vice-versa.
  * @author      caroline sciberras
  * @version     1.0.0
  * @since       2014-02-22

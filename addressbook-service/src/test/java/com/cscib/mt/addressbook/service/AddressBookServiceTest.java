@@ -70,7 +70,7 @@ public class AddressBookServiceTest {
 
         AddressBookService abService = AddressBookService.getInstance(file);
         int ageDifference = abService.getAgeDifferenceByNames(name1, name2);
-        //assertEquals(3810,-ageDifference);
+        assertEquals(2862,ageDifference);
 
 
     }

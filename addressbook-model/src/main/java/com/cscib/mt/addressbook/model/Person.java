@@ -1,17 +1,22 @@
 package com.cscib.mt.addressbook.model;
 
 import com.cscib.mt.addressbook.enums.Gender;
+import com.cscib.mt.addressbook.model.exceptions.MappingException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+* The person POJO.
 * @author      caroline sciberras
 * @version     1.0.0
 * @since       2014-02-22
 */
 public class Person {
+
+    public static final String DELIMITER = ",";
+    public static final String FORMATTER = "dd/MM/yy";
 
     /**
      * The Person Constructor of the person.
@@ -28,13 +33,27 @@ public class Person {
     /**
      * The Person Constructor of the person.
      * @param str the name of the person.
+     * @param delimiter the delimiter.
+     * @param dateFormatter the date formatter e.g. (dd/MM/yy).
      */
-    public Person(String str) throws ParseException {
-        String a[] = str.split(",");
-        this.name = a[0];
-        this.gender = a[1].trim().equalsIgnoreCase(Gender.FEMALE.name()) ? Gender.FEMALE : a[1].trim().equalsIgnoreCase(Gender.MALE.name()) ? Gender.MALE : null;
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
-        this.dateOfBirth = format.parse(a[2]);
+    public Person(String str, String delimiter, String dateFormatter) throws ParseException, MappingException {
+        String strArr[] = str.split(delimiter);
+
+        if (strArr == null || strArr.length != 3) {
+            throw new MappingException("Problems mapping data to a Person.");
+        }
+
+        this.name = strArr[0].trim();
+        this.gender = Gender.valueOfIgnoreCase(strArr[1].trim());
+        this.dateOfBirth = new SimpleDateFormat(dateFormatter).parse(strArr[2].trim());
+    }
+
+    /**
+     * The Person Constructor of the person.
+     * @param str the name of the person.
+     */
+    public Person(String str) throws ParseException, MappingException {
+        this(str, DELIMITER, FORMATTER);
     }
 
     /**
@@ -98,5 +117,18 @@ public class Person {
      */
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    /**
+     * Overriding the toString() method
+     * @return a string
+     */
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", gender=" + gender +
+                ", dob=" + dateOfBirth +
+                '}';
     }
 }

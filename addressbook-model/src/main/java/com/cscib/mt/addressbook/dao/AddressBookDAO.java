@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * The class AddressBookDAO performs all Address Book Data Access operations. It is a singleton class which upon loading
+ * the first time it creates an addressBook object by reading the objects from a file. This DAO can in the future be modified
+ * in order to read from database or use entities to fetch/query data.
+ *
  * @author      caroline sciberras
  * @version     1.0.0
  * @since       2014-02-22
@@ -28,7 +32,7 @@ public class AddressBookDAO {
     private static AddressBookDAO singletonInstance;
 
     /**
-     * The AddressBookDAO private constructor
+     * The AddressBookDAO private constructor which loads the data in the addressBook object on initialisation.
      * @param file the fileName with the names
      * @throws IOException
      */
@@ -42,8 +46,8 @@ public class AddressBookDAO {
 
     /**
      * Singleton getInstance method which returns the singleton instance of the method.
-     * @param file
-     * @return
+     * @param file the file
+     * @return the singleton instance of the class
      * @throws IOException
      */
     public static AddressBookDAO getInstance(File file) throws IOException {
@@ -56,7 +60,7 @@ public class AddressBookDAO {
     }
 
     /**
-     * Find a person by name.
+     * Finds a person by name.
      * @param name the name of the person
      * @return a Person object
      */
@@ -73,18 +77,18 @@ public class AddressBookDAO {
 
 
     /**
-     * Count Persons By Gender.
+     * Counts persons by gender.
      * @param gender the gender
      * @return the number of persons that have a particular Gender
      */
     public int countPersonsByGender(Gender gender) {
-        int countOccurences = 0;
+        int countOccurrences = 0;
         for (Person person : addressBook.getPersons()){
             if (person.getGender() == gender) {
-                countOccurences++;
+                countOccurrences++;
             }
         }
-        return countOccurences;
+        return countOccurrences;
     }
 
     /**

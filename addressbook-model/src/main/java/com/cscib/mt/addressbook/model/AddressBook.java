@@ -3,6 +3,7 @@ package com.cscib.mt.addressbook.model;
 import java.util.List;
 
 /**
+ * The AddressBook POJO.
  * @author      caroline sciberras
  * @version     1.0.0
  * @since       2014-02-22
@@ -29,4 +30,6 @@ public class AddressBook {
     public void setPersons(List<? extends Person> persons) {
         this.persons = persons;
     }
+
+
 }
